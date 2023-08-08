@@ -1,6 +1,14 @@
-import { ColorModeScript } from '@chakra-ui/react'
-import * as React from 'react'
-import * as ReactDOM from 'react-dom/client'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { ColorModeScript, ChakraProvider } from '@chakra-ui/react'
+import { Provider as ReduxProvider } from 'react-redux'
+
+import { theme, toastOptions } from 'theme'
+import { store } from 'store/store'
+
+import '@fontsource/jost/400.css'
+import '@fontsource/jost/700.css'
+
 import { App } from './App'
 
 const container = document.getElementById('root')
@@ -10,6 +18,10 @@ const root = ReactDOM.createRoot(container)
 root.render(
   <React.StrictMode>
     <ColorModeScript />
-    <App />
+    <ReduxProvider store={store}>
+      <ChakraProvider theme={theme} toastOptions={toastOptions}>
+        <App />
+      </ChakraProvider>
+    </ReduxProvider>
   </React.StrictMode>
 )
